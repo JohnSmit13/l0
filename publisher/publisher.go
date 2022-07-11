@@ -145,10 +145,10 @@ func main() {
 
     tmp := []byte(order.OrderUid)
     for i := 0; i < len(order.OrderUid)-4; i++ {
-        if order.OrderUid[i] > 0x30 && order.OrderUid[i] < 0x39 {
-            tmp[i] = byte(0x30 + rand.Intn(9))
+        if tmp[i] > 0x30 && tmp[i] < 0x39 {
+           tmp[i] = byte(0x30 + rand.Intn(9))
         } else {
-            tmp[i] = byte(97 + rand.Intn(6))
+            tmp[i] = byte(0x61 + rand.Intn(6))
         }
     }
     order.OrderUid = string(tmp)
@@ -173,7 +173,7 @@ func main() {
             tmp[i] = byte(0x61 + rand.Intn(6))
         }
     }
-    order.Payment.Transaction = string(tmp)
+    order.Items[0].Rid = string(tmp)
     fmt.Println("result Rid:", order.Items[0].Rid)
 
     msg,err := json.MarshalIndent(order,"","    ")

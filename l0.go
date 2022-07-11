@@ -381,6 +381,8 @@ func psqlWrite(m *stan.Msg,db *pgx.Conn) error {
             fmt.Println("error order:",err)
         }
 
+        cache[order.OrderUid] = m.Data
+
     return nil
 }
 
